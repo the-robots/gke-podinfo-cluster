@@ -3,10 +3,8 @@
 
 This project contains the necessary configurations for deploying an application on Kubernetes and setting up the required infrastructure.
 
-## Directory Structure
-
 - `applications/podinfo`: Contains Kubernetes manifests for the Podinfo application.
-- `infrastructure`: Contains Terraform configurations for infrastructure provisioning.
+- `infrastructure`: Contains Terraform configuration for infrastructure provisioning.
 - `.github/workflows`: Contains the GitHub Actions workflow for deployment.
 
 ## Applications Directory
