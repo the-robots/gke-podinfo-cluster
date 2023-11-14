@@ -62,4 +62,4 @@ jobs:
 
       # Apply Kustomize Configuration
       - name: Apply Kustomize Configuration
-        run: kubectl apply -k application/
+        run: kubectl apply -k applications/podinfo
