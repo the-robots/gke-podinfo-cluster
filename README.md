@@ -7,8 +7,6 @@ This project contains the necessary configurations for deploying an application 
 - `infrastructure`: Contains Terraform configuration for infrastructure provisioning.
 - `.github/workflows`: Contains the GitHub Actions workflow for deployment.
 
-## Applications Directory
-
 ### `deployment.yaml`
 
 Defines the Deployment for the Podinfo application in Kubernetes, specifying the container image, replicas, and other configurations.
@@ -24,8 +22,6 @@ Used by Kustomize for managing Kubernetes resources, listing all the resources t
 ### `service.yaml`
 
 Specifies the Service resource, exposing the application pods to network traffic.
-
-## Infrastructure Directory
 
 ### `main.tf`
 
