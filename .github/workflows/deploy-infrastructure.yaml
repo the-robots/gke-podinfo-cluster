@@ -34,6 +34,7 @@ jobs:
 
   deploy_podinfo:
     name: Deploy Podinfo Application
+    needs: deploy_gke
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
