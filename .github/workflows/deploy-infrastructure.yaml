@@ -1,4 +1,4 @@
-name: Deploy GKE Cluster and Podinfo
+name: Deploy GKE Cluster
 
 on: workflow_dispatch
 
@@ -18,20 +18,22 @@ jobs:
 
       - name: terraform Init
         run: |
-           cd infrastructure
-           terraform init
-
-      - run: |
-           cd infrastructure
-           terraform apply -auto-approve
+          cd infrastructure
+          terraform init
         env:
-          GOOGLE_CREDENTIALS: ${{ secrets.GCP_SA_KEY }}
+          TF_VAR_gcp_credentials: ${{ secrets.GCP_SA_KEY }}
+
+      - name: Terraform Apply
+        run: |
+          cd infrastructure
+          terraform apply -auto-approve
+        env:
+          TF_VAR_gcp_credentials: ${{ secrets.GCP_SA_KEY }}
           GOOGLE_PROJECT: ${{ secrets.GCP_PROJECT }}
           GOOGLE_REGION: ${{ secrets.GCP_REGION }}
 
   deploy_podinfo:
     name: Deploy Podinfo Application
-    needs: deploy_gke
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -46,7 +48,8 @@ jobs:
 
       - name: Authenticate with Google Cloud
         run: |
-          echo '${{ secrets.GCP_SA_KEY }}' | gcloud auth activate-service-account --key-file=-
+           echo '${{ secrets.GCP_SA_KEY }}' > gcp-key.json
+           gcloud auth activate-service-account --key-file=gcp-key.json
 
       # Get Kubernetes credentials
       - name: Get K8s Credentials
@@ -58,4 +61,4 @@ jobs:
 
       # Apply Kustomize Configuration
       - name: Apply Kustomize Configuration
-        run: kubectl apply -k applications/podinfo/
+        run: kubectl apply -k application/
