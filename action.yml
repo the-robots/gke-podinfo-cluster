@@ -1,0 +1,5 @@
+name: 'Deploy cluster running podinfo to GCP'
+description: 'Authorize to GCP, deploy GKE cluster, deploy podinfo app using teraform'
+branding:
+  icon: thumbs-up
+  color: green
